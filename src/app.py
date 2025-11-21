@@ -38,6 +38,58 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    # Adventure / Sports activities
+    "Rock Climbing Club": {
+        "description": "Indoor and outdoor climbing trips focusing on technique and safety",
+        "schedule": "Saturdays, 9:00 AM - 12:00 PM",
+        "max_participants": 16,
+        "participants": ["alex@mergington.edu"]
+    },
+    "Kayaking Expedition": {
+        "description": "Guided kayaking outings on local rivers and lakes, safety-first approach",
+        "schedule": "Sundays, 7:30 AM - 11:30 AM",
+        "max_participants": 12,
+        "participants": ["nina@mergington.edu"]
+    },
+    # Artistic activities
+    "Digital Photography": {
+        "description": "Learn composition, lighting, and post-processing for digital photos",
+        "schedule": "Wednesdays, 4:00 PM - 6:00 PM",
+        "max_participants": 18,
+        "participants": ["liam@mergington.edu"]
+    },
+    "Drama Workshop": {
+        "description": "Acting exercises, scene study, and collaborative productions",
+        "schedule": "Thursdays, 5:00 PM - 7:00 PM",
+        "max_participants": 25,
+        "participants": ["ava@mergington.edu"]
+    },
+    # Intellectual activities
+    "Robotics Team": {
+        "description": "Design, build, and program robots for regional competitions",
+        "schedule": "Mondays and Wednesdays, 4:00 PM - 6:00 PM",
+        "max_participants": 15,
+        "participants": ["zach@mergington.edu"]
+    },
+    "Creative Writing Club": {
+        "description": "Workshops, peer reviews, and short story/poetry projects",
+        "schedule": "Tuesdays, 3:30 PM - 4:30 PM",
+        "max_participants": 20,
+        "participants": ["maya@mergington.edu"]
+    },
+    # Other creative / community activities
+    "Gardening & Ecology": {
+        "description": "Maintain the school garden, learn about native plants and sustainability",
+        "schedule": "Saturdays, 10:00 AM - 12:00 PM",
+        "max_participants": 20,
+        "participants": ["sara@mergington.edu"]
+    },
+    "Community Service Corps": {
+        "description": "Organize and participate in volunteer projects across the community",
+        "schedule": "Variable (project-based), meetings Thursdays 4:00 PM - 5:00 PM",
+        "max_participants": 40,
+        "participants": ["leo@mergington.edu"]
     }
 }
 
@@ -61,6 +113,10 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+
+    # Validate student is not already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
 
     # Add student
     activity["participants"].append(email)
